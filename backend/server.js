@@ -32,9 +32,5 @@ mongoose.connect(
 
 app.use("/users", require("./routes/userRouter"));
 
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static('../frontend/build'));
 
-  
-}
 app.listen(PORT, () => console.log(`The server has started on port: ${PORT}`));
