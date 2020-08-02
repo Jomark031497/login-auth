@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Box,
   AppBar,
@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import AuthOptions from "../auth/AuthOptions";
+import userContext from "../../contexts/userContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -30,6 +31,8 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
   const classes = useStyles();
 
+  const { userData } = useContext(userContext);
+
   return (
     <Box component="div" className={classes.root}>
       <AppBar position="static">
@@ -42,11 +45,7 @@ const Header = () => {
 
           <AuthOptions />
           <IconButton>
-            <Avatar
-              alt="Jomark"
-              src="/static/images/avatar/1.jpg"
-              className={classes.avatar}
-            />
+            <Avatar className={classes.avatar}>{userData.displayName}</Avatar>
           </IconButton>
         </Toolbar>
       </AppBar>
