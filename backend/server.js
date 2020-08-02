@@ -1,28 +1,33 @@
-//dependencies
 const express = require("express");
-const morgan = require("morgan"); //Morgan (logger)
 const mongoose = require("mongoose");
-require("dotenv").config(); //Use dotenv
+const cors = require("cors");
+require("dotenv").config();
 
-//initialize express
+// set up express
+
 const app = express();
+app.use(express.json());
+app.use(cors());
 
-//Connect to database
-mongoose.connect(process.env.db_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}, () => console.log("Connected to MongoDB"));
+const PORT = process.env.PORT || 5000;
 
-//middlewares
-app.use(express.json()); //body parser
-app.use(morgan("dev"));
+app.listen(PORT, () => console.log(`The server has started on port: ${PORT}`));
 
-//routes
-app.get("/", (req, res) => {
-  res.send("Hello worlderino");
-});
+// set up mongoose
 
-//ports
-const port = process.env.PORT || 5000;
+mongoose.connect(
+  process.env.db_URI,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  },
+  (err) => {
+    if (err) throw err;
+    console.log("MongoDB connection established");
+  }
+);
 
-app.listen(port, () => console.log(`Server up and running at port ${port}`));
+// set up routes
+
+app.use("/users", require("./routes/userRouter"));

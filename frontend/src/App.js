@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Axios from "axios";
 import CssBaseLine from "@material-ui/core/CssBaseline";
+import "./App.css";
 //Routes
 import Home from "./components/pages/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Header from "./components/layout/Header";
 import UserContext from "./contexts/userContext";
-
+import Footer from "./components/layout/Footer"
 function App() {
   const [userData, setUserData] = useState({
     token: undefined,
@@ -51,6 +52,7 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
         </Switch>
+        <Footer />
       </UserContext.Provider>
     </BrowserRouter>
   );
