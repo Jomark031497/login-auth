@@ -1,0 +1,4 @@
+1. Create the express app
+2. Connect To Database
+3. Create the model
+4. Create the routes
